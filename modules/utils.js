@@ -6,6 +6,41 @@ function createElement(tag, classes, target, content = "") {
   return element;
 }
 
+function appendKeys(keyboard, rows, lang) {
+  const keys = [];
+  while (keyboard.firstChild) {
+    keyboard.removeChild(keyboard.lastChild);
+  }
+  Object.keys(rows).forEach((row) => {
+    const r = createElement("div", `row row-${row}`, keyboard);
+    rows[row].forEach((key) => {
+      let text = key.en.main;
+      let sec = "";
+      if (lang === "ru") {
+        if ("ru" in key) text = key.ru.main;
+      }
+
+      if (lang === "en" && typeof key.en.sec === "string") sec = key.en.sec;
+      else if (lang === "ru") {
+        if ("ru" in key) {
+          if ("sec" in key.ru) sec = key.ru.sec;
+          else if ("sec" in key.en) sec = key.en.sec;
+        }
+      }
+
+      const k = createElement(
+        "div",
+        key.class ? `key ${key.class}` : "key",
+        r,
+        text
+      );
+      createElement("div", "sec", k, sec);
+      keys.push(k);
+    });
+  });
+  return keys;
+}
+
 function determineLeftRight(event, keys, controller, string) {
   if (event.code.toLowerCase().includes(string)) {
     if (event.code.toLowerCase().includes("left")) {
@@ -45,7 +80,9 @@ function controlHighlight(event, keys, controller = true) {
     keys.forEach((key) => {
       if (
         key.childNodes[0].nodeValue.replace(/\s/g, "") ===
-        event.key.toLowerCase().replace(/\s/g, "")
+          event.key.toLowerCase().replace(/\s/g, "") ||
+        key.childNodes[1].textContent.replace(/\s/g, "") ===
+          event.key.toLowerCase().replace(/\s/g, "")
       )
         if (controller) key.classList.add("active");
         else key.classList.remove("active");
@@ -53,4 +90,4 @@ function controlHighlight(event, keys, controller = true) {
   }
 }
 
-export { createElement, controlHighlight };
+export { createElement, controlHighlight, appendKeys };
