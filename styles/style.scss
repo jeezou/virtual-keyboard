@@ -1,0 +1,122 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 90%;
+  height: 90%;
+
+  .input-container {
+    height: 30%;
+  }
+
+  .keyboard {
+    height: 70%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 0.5vw;
+    text-transform: capitalize;
+
+    .row {
+      column-gap: 0.5vw;
+      display: flex;
+      width: 100%;
+      height: 10%;
+
+      .key {
+        flex: 1;
+        background: rgb(253, 238, 194);
+
+        border-radius: 5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.287);
+
+        position: relative;
+
+        cursor: pointer;
+
+        transition: all 0.1s ease-in-out;
+
+        .sec {
+          position: absolute;
+          left: 10%;
+          top: 10%;
+        }
+
+        &.arrow {
+          background: rgb(226, 96, 66);
+        }
+
+        &.active {
+          background: rgb(84, 255, 10);
+          color: rgb(47, 47, 47);
+        }
+
+        &:active {
+          background: rgb(84, 255, 10);
+          color: rgb(47, 47, 47);
+        }
+      }
+
+      &-first {
+        > :first-child {
+          background: rgb(226, 96, 66);
+        }
+      }
+
+      .backspace,
+      .tab,
+      .enter,
+      .caps,
+      .shift,
+      .control,
+      .rcontrol,
+      .win,
+      .alt,
+      .ralt,
+      .rshift,
+      .delete,
+      .backslash {
+        background: rgb(67, 67, 67);
+        color: #e0e0e0;
+      }
+
+      .backspace {
+        flex-grow: 2;
+      }
+
+      .backslash {
+        flex-grow: 1.3;
+      }
+
+      .tab {
+        flex-grow: 1.4;
+      }
+
+      .enter {
+        flex-grow: 2.4;
+      }
+
+      .caps {
+        flex-grow: 1.6;
+      }
+
+      .shift {
+        flex-grow: 1.8;
+      }
+      .space {
+        flex-grow: 7.2;
+      }
+    }
+  }
+}

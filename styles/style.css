@@ -1,0 +1,78 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh; }
+
+.container {
+  width: 90%;
+  height: 90%; }
+  .container .input-container {
+    height: 30%; }
+  .container .keyboard {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 0.5vw;
+    text-transform: capitalize; }
+    .container .keyboard .row {
+      column-gap: 0.5vw;
+      display: flex;
+      width: 100%;
+      height: 10%; }
+      .container .keyboard .row .key {
+        flex: 1;
+        background: #fdeec2;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.287);
+        position: relative;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out; }
+        .container .keyboard .row .key .sec {
+          position: absolute;
+          left: 10%;
+          top: 10%; }
+        .container .keyboard .row .key.arrow {
+          background: #e26042; }
+        .container .keyboard .row .key.active {
+          background: #54ff0a;
+          color: #2f2f2f; }
+        .container .keyboard .row .key:active {
+          background: #54ff0a;
+          color: #2f2f2f; }
+      .container .keyboard .row-first > :first-child {
+        background: #e26042; }
+      .container .keyboard .row .backspace,
+      .container .keyboard .row .tab,
+      .container .keyboard .row .enter,
+      .container .keyboard .row .caps,
+      .container .keyboard .row .shift,
+      .container .keyboard .row .control,
+      .container .keyboard .row .rcontrol,
+      .container .keyboard .row .win,
+      .container .keyboard .row .alt,
+      .container .keyboard .row .ralt,
+      .container .keyboard .row .rshift,
+      .container .keyboard .row .delete,
+      .container .keyboard .row .backslash {
+        background: #434343;
+        color: #e0e0e0; }
+      .container .keyboard .row .backspace {
+        flex-grow: 2; }
+      .container .keyboard .row .backslash {
+        flex-grow: 1.3; }
+      .container .keyboard .row .tab {
+        flex-grow: 1.4; }
+      .container .keyboard .row .enter {
+        flex-grow: 2.4; }
+      .container .keyboard .row .caps {
+        flex-grow: 1.6; }
+      .container .keyboard .row .shift {
+        flex-grow: 1.8; }
+      .container .keyboard .row .space {
+        flex-grow: 7.2; }
