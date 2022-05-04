@@ -228,6 +228,7 @@ export default {
     {
       en: {
         main: "[",
+        sec: "{",
       },
       ru: {
         main: "х",
@@ -236,6 +237,7 @@ export default {
     {
       en: {
         main: "]",
+        sec: "}",
       },
       ru: {
         main: "ъ",

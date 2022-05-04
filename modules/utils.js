@@ -8,48 +8,50 @@ function createElement(tag, classes, target, content = "") {
 
 function appendKeys(keyboard, rows, lang) {
   const keys = {};
+  const ruKeys = {};
   while (keyboard.firstChild) {
     keyboard.removeChild(keyboard.lastChild);
   }
   Object.keys(rows).forEach((row) => {
     const r = createElement("div", `row row-${row}`, keyboard);
     rows[row].forEach((key) => {
-      let text = key.en.main;
-      let sec = "";
-      if (lang === "ru") {
-        if ("ru" in key) text = key.ru.main;
-      }
+      const { main } = key.en;
+      const ruMain = "ru" in key ? key.ru.main : key.en.main;
+      const sec = "sec" in key.en ? key.en.sec : "";
+      let ruSec = "";
 
-      if (lang === "en" && typeof key.en.sec === "string") sec = key.en.sec;
-      else if (lang === "ru") {
-        if ("ru" in key) {
-          console.log(key);
-          if ("sec" in key.ru) sec = key.ru.sec;
-          else if ("sec" in key.en) sec = key.en.sec;
-        }
-      }
+      if ("ru" in key) {
+        if ("sec" in key.ru) ruSec = key.ru.sec;
+      } else if ("sec" in key.en) ruSec = key.en.sec;
 
       const k = createElement(
         "div",
         key.class ? `key ${key.class}` : "key",
         r,
-        text
+        lang === "en" ? main : ruMain
       );
-      createElement("div", "sec", k, sec);
+      createElement("div", "sec", k, lang === "en" ? sec : ruSec);
 
-      const normalizeText = text.toLowerCase().replace(/\s/g, "");
+      const normalizeMain = main.toLowerCase().replace(/\s/g, "");
       const normalizeSec = sec.toLowerCase().replace(/\s/g, "");
 
-      if (normalizeText === "backspace") console.log(keys);
+      const normalizeRuMain = ruMain.toLowerCase().replace(/\s/g, "");
+      const normalizeRuSec = ruSec.toLowerCase().replace(/\s/g, "");
 
-      if (normalizeText in keys) keys[`r${normalizeText}`] = k;
-      else keys[normalizeText] = k;
+      if (normalizeRuMain in ruKeys) ruKeys[`r${normalizeRuMain}`] = k;
+      else ruKeys[normalizeRuMain] = k;
+
+      if (!(normalizeRuSec in ruKeys) && normalizeRuSec !== "")
+        ruKeys[normalizeRuSec] = k;
+
+      if (normalizeMain in keys) keys[`r${normalizeMain}`] = k;
+      else keys[normalizeMain] = k;
 
       if (!(normalizeSec in keys) && normalizeSec !== "")
         keys[normalizeSec] = k;
     });
   });
-  return keys;
+  return { keys, ruKeys };
 }
 
 function determineLeftRight(event, keys, controller, string) {
@@ -72,8 +74,10 @@ function determineLeftRight(event, keys, controller, string) {
   }
 }
 
-function controlHighlight(event, keys, controller = true) {
-  console.log(event);
+function controlHighlight(event, obj, controller = true) {
+  let keys = {};
+  let ruKeys = {};
+  ({ keys, ruKeys } = obj);
   const code = event.code.toLowerCase();
   if (code.includes("control"))
     determineLeftRight(event, keys, controller, "control");
@@ -81,7 +85,10 @@ function controlHighlight(event, keys, controller = true) {
     determineLeftRight(event, keys, controller, "shift");
   else if (code.includes("alt"))
     determineLeftRight(event, keys, controller, "alt");
-  else if (code.includes("arrow")) {
+  else if (code.includes("meta")) {
+    if (controller) keys.win.classList.add("active");
+    else keys.win.classList.remove("active");
+  } else if (code.includes("arrow")) {
     Object.keys(keys).forEach((key) => {
       if (
         keys[key].classList.value
@@ -95,7 +102,7 @@ function controlHighlight(event, keys, controller = true) {
     });
   } else {
     const e = event.key.toLowerCase().replace(/\s/g, "");
-    if (e in keys) {
+    if (e in keys || e in ruKeys) {
       if (controller) keys[e].classList.add("active");
       else keys[e].classList.remove("active");
     }

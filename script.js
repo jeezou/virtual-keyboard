@@ -5,8 +5,9 @@ import {
   appendKeys,
 } from "./modules/utils.js";
 
-const pressed = {};
+let pressed = {};
 let keys = {};
+let ruKeys = {};
 let lang = "en";
 
 const body = document.querySelector("body");
@@ -18,28 +19,32 @@ const kbLayout = createElement("div", "layout", body);
 const img = createElement("img", "image", kbLayout);
 img.src = lang === "en" ? "./assets/images/en.png" : "./assets/images/ru.png";
 
-keys = appendKeys(keyboard, rows, lang);
+({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
 
 document.addEventListener("keydown", (e) => {
-  pressed[e.key.toLowerCase()] = true;
-
-  if (pressed.control && pressed.alt) {
-    lang = lang === "en" ? "ru" : "en";
-    img.src =
-      lang === "en" ? "./assets/images/en.png" : "./assets/images/ru.png";
-    keys = appendKeys(keyboard, rows, lang);
-  }
-
   e.preventDefault();
-  controlHighlight(e, keys);
+  if (!pressed[e.key.toLowerCase()]) {
+    pressed[e.key.toLowerCase()] = true;
+    if (pressed.control && pressed.alt) {
+      lang = lang === "en" ? "ru" : "en";
+      img.src =
+        lang === "en" ? "./assets/images/en.png" : "./assets/images/ru.png";
+      ({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
+    }
+    controlHighlight(e, { keys, ruKeys });
+  }
 });
 
 document.addEventListener("keyup", (e) => {
-  delete pressed[e.key.toLowerCase()];
   e.preventDefault();
-  controlHighlight(e, keys, false);
+  delete pressed[e.key.toLowerCase()];
+  controlHighlight(e, { keys, ruKeys }, false);
 });
 
 document.addEventListener("visibilitychange", () => {
-  keys = appendKeys(keyboard, rows, lang);
+  const pressedKeys = Object.keys(pressed);
+  if (pressedKeys.length > 0) {
+    Object.keys(pressed).forEach((key) => delete pressed[key]);
+    ({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
+  }
 });
