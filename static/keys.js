@@ -7,11 +7,16 @@ export default {
       },
       ru: {
         main: "ё",
+        sec: "",
       },
       class: "",
     },
     {
       en: {
+        main: "1",
+        sec: "!",
+      },
+      ru: {
         main: "1",
         sec: "!",
       },
@@ -51,6 +56,10 @@ export default {
         main: "5",
         sec: "%",
       },
+      ru: {
+        main: "5",
+        sec: "%",
+      },
     },
     {
       en: {
@@ -77,9 +86,17 @@ export default {
         main: "8",
         sec: "*",
       },
+      ru: {
+        main: "8",
+        sec: "*",
+      },
     },
     {
       en: {
+        main: "9",
+        sec: "(",
+      },
+      ru: {
         main: "9",
         sec: "(",
       },
@@ -89,15 +106,27 @@ export default {
         main: "0",
         sec: ")",
       },
+      ru: {
+        main: "0",
+        sec: ")",
+      },
     },
     {
       en: {
         main: "-",
         sec: "_",
       },
+      ru: {
+        main: "-",
+        sec: "_",
+      },
     },
     {
       en: {
+        main: "=",
+        sec: "+",
+      },
+      ru: {
         main: "=",
         sec: "+",
       },
@@ -309,7 +338,8 @@ export default {
         sec: ":",
       },
       ru: {
-        main: "д",
+        main: "ж",
+        sec: "",
       },
     },
     {
@@ -319,6 +349,7 @@ export default {
       },
       ru: {
         main: "э",
+        sec: "",
       },
     },
     {
@@ -398,6 +429,7 @@ export default {
       },
       ru: {
         main: "б",
+        sec: "",
       },
     },
     {
@@ -407,6 +439,7 @@ export default {
       },
       ru: {
         main: "ю",
+        sec: "",
       },
     },
     {

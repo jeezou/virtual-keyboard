@@ -6,7 +6,7 @@ import {
 } from "./modules/utils.js";
 
 const pressed = {};
-let keys = [];
+let keys = {};
 let lang = "en";
 
 const body = document.querySelector("body");
@@ -38,4 +38,8 @@ document.addEventListener("keyup", (e) => {
   delete pressed[e.key.toLowerCase()];
   e.preventDefault();
   controlHighlight(e, keys, false);
+});
+
+document.addEventListener("visibilitychange", () => {
+  keys = appendKeys(keyboard, rows, lang);
 });

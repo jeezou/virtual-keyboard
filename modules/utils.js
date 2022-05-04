@@ -7,7 +7,7 @@ function createElement(tag, classes, target, content = "") {
 }
 
 function appendKeys(keyboard, rows, lang) {
-  const keys = [];
+  const keys = {};
   while (keyboard.firstChild) {
     keyboard.removeChild(keyboard.lastChild);
   }
@@ -23,6 +23,7 @@ function appendKeys(keyboard, rows, lang) {
       if (lang === "en" && typeof key.en.sec === "string") sec = key.en.sec;
       else if (lang === "ru") {
         if ("ru" in key) {
+          console.log(key);
           if ("sec" in key.ru) sec = key.ru.sec;
           else if ("sec" in key.en) sec = key.en.sec;
         }
@@ -35,7 +36,17 @@ function appendKeys(keyboard, rows, lang) {
         text
       );
       createElement("div", "sec", k, sec);
-      keys.push(k);
+
+      const normalizeText = text.toLowerCase().replace(/\s/g, "");
+      const normalizeSec = sec.toLowerCase().replace(/\s/g, "");
+
+      if (normalizeText === "backspace") console.log(keys);
+
+      if (normalizeText in keys) keys[`r${normalizeText}`] = k;
+      else keys[normalizeText] = k;
+
+      if (!(normalizeSec in keys) && normalizeSec !== "")
+        keys[normalizeSec] = k;
     });
   });
   return keys;
@@ -44,17 +55,17 @@ function appendKeys(keyboard, rows, lang) {
 function determineLeftRight(event, keys, controller, string) {
   if (event.code.toLowerCase().includes(string)) {
     if (event.code.toLowerCase().includes("left")) {
-      keys.forEach((key) => {
-        if (key.classList.contains(string)) {
-          if (controller) key.classList.add("active");
-          else key.classList.remove("active");
+      Object.keys(keys).forEach((key) => {
+        if (keys[key].classList.contains(string)) {
+          if (controller) keys[key].classList.add("active");
+          else keys[key].classList.remove("active");
         }
       });
     } else {
-      keys.forEach((key) => {
-        if (key.classList.contains(`r${string}`)) {
-          if (controller) key.classList.add("active");
-          else key.classList.remove("active");
+      Object.keys(keys).forEach((key) => {
+        if (keys[key].classList.contains(`r${string}`)) {
+          if (controller) keys[key].classList.add("active");
+          else keys[key].classList.remove("active");
         }
       });
     }
@@ -62,6 +73,7 @@ function determineLeftRight(event, keys, controller, string) {
 }
 
 function controlHighlight(event, keys, controller = true) {
+  console.log(event);
   const code = event.code.toLowerCase();
   if (code.includes("control"))
     determineLeftRight(event, keys, controller, "control");
@@ -70,23 +82,23 @@ function controlHighlight(event, keys, controller = true) {
   else if (code.includes("alt"))
     determineLeftRight(event, keys, controller, "alt");
   else if (code.includes("arrow")) {
-    keys.forEach((key) => {
-      if (key.classList.value.replace(/\s/g, "").toLowerCase().includes(code)) {
-        if (controller) key.classList.add("active");
-        else key.classList.remove("active");
+    Object.keys(keys).forEach((key) => {
+      if (
+        keys[key].classList.value
+          .replace(/\s/g, "")
+          .toLowerCase()
+          .includes(code)
+      ) {
+        if (controller) keys[key].classList.add("active");
+        else keys[key].classList.remove("active");
       }
     });
   } else {
-    keys.forEach((key) => {
-      if (
-        key.childNodes[0].nodeValue.replace(/\s/g, "") ===
-          event.key.toLowerCase().replace(/\s/g, "") ||
-        key.childNodes[1].textContent.replace(/\s/g, "") ===
-          event.key.toLowerCase().replace(/\s/g, "")
-      )
-        if (controller) key.classList.add("active");
-        else key.classList.remove("active");
-    });
+    const e = event.key.toLowerCase().replace(/\s/g, "");
+    if (e in keys) {
+      if (controller) keys[e].classList.add("active");
+      else keys[e].classList.remove("active");
+    }
   }
 }
 
