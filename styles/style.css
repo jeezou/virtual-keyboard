@@ -25,7 +25,8 @@ body {
   .container .input-container {
     display: flex;
     align-items: center;
-    flex-direction: column; }
+    flex-direction: column;
+    max-width: 1240px; }
     .container .input-container .textarea {
       border-radius: 5px;
       width: 100%;
@@ -192,7 +193,8 @@ body {
     align-items: center;
     row-gap: 1vw;
     text-transform: capitalize;
-    padding-bottom: 5px;
+    padding: 20px 20px;
+    padding-bottom: 25px;
     background: #fcf5ec;
     border-radius: 1vw;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px, inset 0 0 0 2px #444444; }
@@ -264,14 +266,13 @@ body {
       .container .keyboard .row .space {
         flex-grow: 7.2; }
 
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 2100px) {
   .container .input-container {
     max-width: 1540px;
     box-sizing: content-box; }
     .container .input-container .textarea {
-      height: 100%; }
+      height: 80%; }
   .container .keyboard {
     box-sizing: content-box;
     max-width: 1500px;
-    padding: 20px 20px;
     height: 100%; } }

@@ -33,6 +33,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    max-width: 1240px;
     .textarea {
       border-radius: 5px;
       width: 100%;
@@ -264,7 +265,8 @@ body {
     align-items: center;
     row-gap: 1vw;
     text-transform: capitalize;
-    padding-bottom: 5px;
+    padding: 20px 20px;
+    padding-bottom: 25px;
 
     background: #fcf5ec;
     border-radius: 1vw;
@@ -382,20 +384,19 @@ body {
   }
 }
 
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 2100px) {
   .container {
     .input-container {
       max-width: 1540px;
       box-sizing: content-box;
 
       .textarea {
-        height: 100%;
+        height: 80%;
       }
     }
     .keyboard {
       box-sizing: content-box;
       max-width: 1500px;
-      padding: 20px 20px;
 
       height: 100%;
     }
