@@ -1,45 +1,217 @@
-@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Scada:wght@700&family=Yeseva+One&display=swap");
 
+html {
+  font-size: calc(0.7vw + 5px);
+}
+
 body {
-  // font-family: "Yeseva One", cursive;
   font-family: "Scada", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-
-  font-size: calc(0.7vw + 5px);
+  overflow: hidden;
 
   position: relative;
-  background: rgb(214, 214, 214);
-
-  .layout {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 5vw;
-
-    .image {
-      width: 100%;
-    }
-  }
+  background-color: #ffe9cf;
 }
 
 .container {
   width: 90%;
-  height: 90%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-  max-width: 1300px;
-  max-height: 750px;
+  > * {
+    max-width: 1200px;
+  }
+
+  .info-container {
+    user-select: none;
+    background-color: #ffcc8e;
+
+    position: relative;
+    top: 6%;
+    height: 25%;
+    width: 100vw;
+    max-width: none;
+
+    border-top: 2px solid #2b1800;
+
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    column-gap: 10vw;
+
+    > * {
+      padding-top: 20px;
+    }
+
+    .info-contacts {
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      row-gap: 40px;
+
+      .content {
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        cursor: pointer;
+        position: relative;
+        width: fit-content;
+
+        &:after {
+          content: "";
+          width: 0;
+          height: 2px;
+          position: absolute;
+          background: #000;
+          bottom: -5px;
+          left: 0;
+
+          transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+          &:after {
+            width: 100%;
+          }
+        }
+      }
+
+      .wrapper {
+        position: relative;
+        display: inline-block;
+
+        &:after {
+          content: "";
+          height: 100%;
+          width: 100%;
+          padding: 4px;
+          position: absolute;
+          bottom: -15px;
+          left: -4px;
+          z-index: 0;
+          background-color: #2b1800;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 0.3rem;
+        }
+      }
+
+      .contacts-heading {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        padding: 1rem 1.3rem;
+        box-sizing: border-box;
+        background-color: #ffa12b;
+        border-radius: 0.3rem;
+        color: #f6f6f6;
+        font-size: 1.3rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        row-gap: 2px;
+        z-index: 1;
+
+        height: fit-content;
+
+        text-transform: uppercase;
+        text-shadow: 0px 1px 0px #000;
+
+        -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+        -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+        box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+
+        &:hover {
+          top: 3px;
+          background-color: #fb9922;
+
+          -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+          box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+        }
+
+        &:active {
+          top: 10px;
+          background-color: #f78900;
+
+          -webkit-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+          box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+        }
+      }
+    }
+
+    .info-guide {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+
+      font-size: 1.3rem;
+
+      border-radius: 0.7vw;
+
+      .heading {
+        width: 70%;
+        text-align: center;
+        border-bottom: 2px solid rgb(56, 56, 56);
+        align-self: center;
+        font-size: 2rem;
+        padding-bottom: 8px;
+        margin-bottom: 3px;
+      }
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: column;
+
+      .content {
+        display: flex;
+        height: 70%;
+        font-size: 1.2rem;
+        justify-content: center;
+        align-items: center;
+        column-gap: 20px;
+      }
+
+      .image {
+        height: 40%;
+        justify-self: flex-start;
+      }
+
+      .language-heading {
+        white-space: nowrap;
+        text-align: center;
+        border-bottom: 2px solid rgb(56, 56, 56);
+        align-self: center;
+        font-size: 2rem;
+        padding-bottom: 8px;
+        margin-bottom: 3px;
+      }
+    }
+  }
 
   .input-container {
-    height: 50%;
+    height: 30%;
+    width: 100%;
   }
 
   .keyboard {
     height: 50%;
+    max-height: 370px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -47,9 +219,10 @@ body {
     align-items: center;
     row-gap: 1vw;
     text-transform: capitalize;
+    padding-bottom: 5px;
 
-    background: #fdf3e6;
-    border-radius: 1.5vw;
+    background: #fcf5ec;
+    border-radius: 1vw;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
       rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
       rgba(0, 0, 0, 0.09) 0px 32px 16px, inset 0 0 0 2px rgb(68, 68, 68);
@@ -57,8 +230,8 @@ body {
     .row {
       column-gap: 0.8vw;
       display: flex;
-      width: 90%;
-      height: 13%;
+      width: 95%;
+      height: 14%;
 
       .key {
         flex: 1;
@@ -70,8 +243,6 @@ body {
         align-items: center;
         justify-content: center;
 
-        // box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.287);
-
         position: relative;
         top: 0px;
 
@@ -80,7 +251,6 @@ body {
         cursor: pointer;
 
         transition: all 0.15s ease-in-out;
-        // transition: box-shadow 0.5s ease-in-out;
 
         .sec {
           position: absolute;
@@ -93,23 +263,14 @@ body {
         }
 
         &.active {
-          background: rgb(84, 255, 10);
-          // color: rgb(230, 230, 230);
-
           top: 8px;
-          // margin-top: 10px;
           background-color: #f78900;
           transition: all 0.1s ease-in-out;
-
           box-shadow: 0 0px 0 #915100, inset 0 0 0 1px #915100;
         }
 
         &:active {
-          background: rgb(84, 255, 10);
-          // color: rgb(230, 230, 230);
-
           top: 8px;
-          // margin-top: 10px;
           background-color: #f78900;
           transition: all 0.1s ease-in-out;
 
