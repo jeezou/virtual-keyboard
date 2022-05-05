@@ -381,3 +381,23 @@ body {
     }
   }
 }
+
+@media screen and (min-width: 1900px) {
+  .container {
+    .input-container {
+      max-width: 1540px;
+      box-sizing: content-box;
+
+      .textarea {
+        height: 100%;
+      }
+    }
+    .keyboard {
+      box-sizing: content-box;
+      max-width: 1500px;
+      padding: 20px 20px;
+
+      height: 100%;
+    }
+  }
+}

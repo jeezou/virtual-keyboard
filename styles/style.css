@@ -263,3 +263,15 @@ body {
         flex-grow: 1.8; }
       .container .keyboard .row .space {
         flex-grow: 7.2; }
+
+@media screen and (min-width: 1900px) {
+  .container .input-container {
+    max-width: 1540px;
+    box-sizing: content-box; }
+    .container .input-container .textarea {
+      height: 100%; }
+  .container .keyboard {
+    box-sizing: content-box;
+    max-width: 1500px;
+    padding: 20px 20px;
+    height: 100%; } }
