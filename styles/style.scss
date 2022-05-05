@@ -29,6 +29,50 @@ body {
     max-width: 1200px;
   }
 
+  .input-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .textarea {
+      border-radius: 5px;
+      width: 100%;
+      height: 80%;
+      padding: 2rem;
+      box-sizing: border-box;
+
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+
+      font-size: 1.4rem;
+      box-shadow: 0 0 0 2px #2b1800, rgba(50, 50, 93, 0.25) 0px 20px 30px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+      border: none;
+      background-color: transparent;
+      resize: none;
+      outline: none;
+
+      background: #fcf5ec;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+        background-color: #f9f9fd;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #434343;
+      }
+    }
+  }
+
   .info-container {
     user-select: none;
     background-color: #ffcc8e;
@@ -209,6 +253,7 @@ body {
   }
 
   .keyboard {
+    user-select: none;
     height: 50%;
     max-height: 370px;
     width: 100%;
@@ -256,6 +301,8 @@ body {
           position: absolute;
           left: 10%;
           top: 10%;
+
+          pointer-events: none;
         }
 
         &.arrow {
@@ -275,6 +322,10 @@ body {
           transition: all 0.1s ease-in-out;
 
           box-shadow: 0 0px 0 #915100, inset 0 0 0 1px #915100;
+        }
+
+        &.highlight {
+          background: #e48201;
         }
       }
 

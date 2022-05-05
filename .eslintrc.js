@@ -9,13 +9,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    "import/extensions": [
-      "error",
-      "always",
-      // {
-      //   js: "ignorePackages",
-      // },
-    ],
+    "import/extensions": ["error", "always"],
   },
   settings: {},
 };

@@ -3,6 +3,9 @@ import {
   createElement,
   controlHighlight,
   appendKeys,
+  handleInput,
+  handleClickInput,
+  handleOutput,
 } from "./modules/utils.js";
 
 const pressed = {};
@@ -38,6 +41,9 @@ const container = createElement("section", "container", body);
 const inputField = createElement("div", "input-container", container);
 const keyboard = createElement("div", "keyboard", container);
 const infoField = createElement("div", "info-container", container);
+
+const textArea = createElement("textarea", "textarea", inputField);
+textArea.focus();
 
 const infoContacts = createElement("div", "info-contacts", infoField);
 const contactsHeadingWrapper = createElement("div", "wrapper", infoContacts);
@@ -80,7 +86,15 @@ img.src = lang === "en" ? "./assets/images/en.svg" : "./assets/images/ru.svg";
 
 document.addEventListener("keydown", (e) => {
   e.preventDefault();
-  if (!pressed[e.key.toLowerCase()]) {
+
+  textArea.focus();
+  const output = handleInput(e, ruKeys, lang, pressed);
+  textArea.value = handleOutput(output, textArea).value;
+
+  if (
+    !pressed[e.key.toLowerCase().replace(/\s/g, "")] &&
+    e.key.toLowerCase().replace(/\s/g, "") !== "capslock"
+  ) {
     pressed[e.key.toLowerCase()] = true;
     if (pressed.control && pressed.alt) {
       lang = lang === "en" ? "ru" : "en";
@@ -89,14 +103,58 @@ document.addEventListener("keydown", (e) => {
       ({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
       localStorage.setItem("lang", lang);
     }
-    controlHighlight(e, { keys, ruKeys });
   }
+
+  controlHighlight(e, { keys, ruKeys });
 });
 
 document.addEventListener("keyup", (e) => {
   e.preventDefault();
-  delete pressed[e.key.toLowerCase()];
+
+  if (e.key.toLowerCase() === "capslock") {
+    keys.capslock.classList.toggle("highlight");
+    if (pressed.capslock) delete pressed.capslock;
+    else pressed.capslock = true;
+  } else delete pressed[e.key.toLowerCase()];
+
   controlHighlight(e, { keys, ruKeys }, false);
+});
+
+keyboard.addEventListener("mousedown", (e) => {
+  if (e.target.classList.contains("key")) {
+    const main = e.target.childNodes[0].textContent;
+    if (!pressed[main] && main !== "capslock") {
+      pressed[main] = true;
+      if ((pressed.ctrl && pressed.alt) || (pressed.control && pressed.alt)) {
+        lang = lang === "en" ? "ru" : "en";
+        img.src =
+          lang === "en" ? "./assets/images/en.svg" : "./assets/images/ru.svg";
+        ({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
+        localStorage.setItem("lang", lang);
+      }
+    }
+    const output = handleClickInput(e, pressed);
+    const handledOutput = handleOutput(output, textArea, true);
+    textArea.value = handledOutput.ta.value;
+    textArea.selectionStart = handledOutput.start;
+    textArea.selectionEnd = handledOutput.end;
+    setTimeout(() => {
+      textArea.focus();
+    }, 0);
+  }
+});
+
+keyboard.addEventListener("mouseup", (e) => {
+  if (e.target.classList.contains("key")) {
+    const main = e.target.childNodes[0].textContent
+      .toLowerCase()
+      .replace(/\s/g, "");
+    if (main === "capslock") {
+      keys.capslock.classList.toggle("highlight");
+      if (pressed.capslock) delete pressed.capslock;
+      else pressed.capslock = true;
+    } else delete pressed[main];
+  }
 });
 
 document.addEventListener("visibilitychange", () => {

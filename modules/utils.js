@@ -36,13 +36,12 @@ function appendKeys(keyboard, rows, lang) {
       const normalizeSec = sec.toLowerCase().replace(/\s/g, "");
 
       const normalizeRuMain = ruMain.toLowerCase().replace(/\s/g, "");
-      const normalizeRuSec = ruSec.toLowerCase().replace(/\s/g, "");
 
-      if (normalizeRuMain in ruKeys) ruKeys[`r${normalizeRuMain}`] = k;
-      else ruKeys[normalizeRuMain] = k;
+      if (normalizeMain in ruKeys) ruKeys[`r${normalizeRuMain}`] = k;
+      else ruKeys[normalizeMain] = k;
 
-      if (!(normalizeRuSec in ruKeys) && normalizeRuSec !== "")
-        ruKeys[normalizeRuSec] = k;
+      if (!(normalizeSec in ruKeys) && normalizeSec !== "")
+        ruKeys[normalizeSec] = k;
 
       if (normalizeMain in keys) keys[`r${normalizeMain}`] = k;
       else keys[normalizeMain] = k;
@@ -109,4 +108,164 @@ function controlHighlight(event, obj, controller = true) {
   }
 }
 
-export { createElement, controlHighlight, appendKeys };
+function handleOutput(output, ta, mouse = false) {
+  const textArea = ta;
+  if (output) {
+    const val = textArea.value;
+    let start = textArea.selectionStart;
+    let end = textArea.selectionEnd;
+    if (typeof output === "string") {
+      textArea.value = val.slice(0, start) + output + val.slice(end);
+      textArea.selectionStart = start + 1;
+      textArea.selectionEnd = start + 1;
+    } else if (typeof output === "object") {
+      if (output.name === "backspace") {
+        if (start > 0) {
+          if (start === end) {
+            start -= 1;
+            end -= 1;
+            textArea.value = `${val.slice(0, start)}${val.slice(end + 1)}`;
+
+            textArea.selectionStart = start;
+            textArea.selectionEnd = end;
+          } else {
+            textArea.value = `${val.slice(0, start)}${val.slice(end)}`;
+            end = start;
+            textArea.selectionStart = start;
+            textArea.selectionEnd = end;
+          }
+        } else if (start === 0 && end !== start) {
+          textArea.value = `${val.slice(0, start)}${val.slice(end)}`;
+          end = start;
+          textArea.selectionStart = start;
+          textArea.selectionEnd = end;
+        }
+      }
+      if (output.name === "delete") {
+        if (start === end) {
+          textArea.value = `${val.slice(0, start)}${val.slice(end + 1)}`;
+
+          textArea.selectionStart = start;
+          textArea.selectionEnd = start;
+        }
+        if (start !== end) {
+          textArea.value = `${val.slice(0, start)}${val.slice(end)}`;
+          end = start;
+          textArea.selectionStart = start;
+          textArea.selectionEnd = end;
+        }
+      }
+      if (output.name === "enter") {
+        textArea.value = `${val.slice(0, start)}\n${val.slice(end)}`;
+        textArea.selectionStart = start + 1;
+        textArea.selectionEnd = start + 1;
+      }
+      if (output.name === "tab") {
+        textArea.value = `${val.slice(0, start)}\t${val.slice(end)}`;
+        textArea.selectionStart = start + 1;
+        textArea.selectionEnd = start + 1;
+      }
+    }
+  }
+  if (mouse)
+    return {
+      start: textArea.selectionStart,
+      end: textArea.selectionEnd,
+      ta: textArea,
+    };
+  return textArea;
+}
+
+function handleClickInput(e, pressed) {
+  const controls = [
+    "tab",
+    "capslock",
+    "shift",
+    "ctrl",
+    "alt",
+    "meta",
+    "delete",
+    "enter",
+    "backspace",
+    "arrowup",
+    "arrowdown",
+    "arrowleft",
+    "arrowright",
+  ];
+
+  const node = e.target;
+  const main = node.childNodes[0].textContent.toLowerCase().replace(/\s/g, "");
+  const sec = node.childNodes[1]
+    ? node.childNodes[1].textContent.toLowerCase().replace(/\s/g, "")
+    : "";
+  let output = "";
+
+  if (node.classList.contains("space")) return " ";
+
+  if (!controls.includes(main)) {
+    if (pressed.shift) {
+      if (sec) output += sec;
+      else output += main.toUpperCase();
+    } else if (pressed.capslock && !pressed.shift) output += main.toUpperCase();
+    else output += main;
+  } else {
+    if (main === "backspace") return { name: "backspace" };
+    if (main === "delete") return { name: "delete" };
+    if (main === "tab") return { name: "tab" };
+    if (main === "enter") return { name: "enter" };
+  }
+
+  return output;
+}
+
+function handleInput(e, ruKeys, lang, pressed) {
+  const controls = [
+    "tab",
+    "capslock",
+    "shift",
+    "control",
+    "alt",
+    "meta",
+    "delete",
+    "enter",
+    "backspace",
+    "arrowup",
+    "arrowdown",
+    "arrowleft",
+    "arrowright",
+  ];
+
+  let output = "";
+  const normalizeKey = e.key.toLowerCase().replace(/\s/g, "");
+  if (normalizeKey in ruKeys) {
+    if (!controls.includes(normalizeKey)) {
+      if (lang === "en") output += e.key;
+      else {
+        const node = ruKeys[normalizeKey];
+        const main = node.childNodes[0].textContent;
+        const sec = node.childNodes[1] ? node.childNodes[1].textContent : "";
+        if (pressed.shift) {
+          if (sec) output += sec;
+          else output += main.toUpperCase();
+        } else if (pressed.capslock && !pressed.shift)
+          output += main.toUpperCase();
+        else output += main;
+      }
+    } else {
+      if (normalizeKey === "backspace") return { name: "backspace" };
+      if (normalizeKey === "delete") return { name: "delete" };
+      if (normalizeKey === "tab") return { name: "tab" };
+      if (normalizeKey === "enter") return { name: "enter" };
+    }
+  } else return -1;
+  return output;
+}
+
+export {
+  createElement,
+  controlHighlight,
+  appendKeys,
+  handleInput,
+  handleClickInput,
+  handleOutput,
+};

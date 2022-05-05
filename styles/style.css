@@ -22,6 +22,36 @@ body {
   justify-content: space-between; }
   .container > * {
     max-width: 1200px; }
+  .container .input-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; }
+    .container .input-container .textarea {
+      border-radius: 5px;
+      width: 100%;
+      height: 80%;
+      padding: 2rem;
+      box-sizing: border-box;
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+      font-size: 1.4rem;
+      box-shadow: 0 0 0 2px #2b1800, rgba(50, 50, 93, 0.25) 0px 20px 30px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      border: none;
+      background-color: transparent;
+      resize: none;
+      outline: none;
+      background: #fcf5ec; }
+      .container .input-container .textarea::-webkit-scrollbar {
+        width: 10px;
+        cursor: pointer; }
+      .container .input-container .textarea::-webkit-scrollbar-track {
+        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+        background-color: #f9f9fd;
+        border-radius: 5px; }
+      .container .input-container .textarea::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #434343; }
   .container .info-container {
     user-select: none;
     background-color: #ffcc8e;
@@ -152,6 +182,7 @@ body {
     height: 30%;
     width: 100%; }
   .container .keyboard {
+    user-select: none;
     height: 50%;
     max-height: 370px;
     width: 100%;
@@ -185,7 +216,8 @@ body {
         .container .keyboard .row .key .sec {
           position: absolute;
           left: 10%;
-          top: 10%; }
+          top: 10%;
+          pointer-events: none; }
         .container .keyboard .row .key.arrow {
           background: #e26042; }
         .container .keyboard .row .key.active {
@@ -198,6 +230,8 @@ body {
           background-color: #f78900;
           transition: all 0.1s ease-in-out;
           box-shadow: 0 0px 0 #915100, inset 0 0 0 1px #915100; }
+        .container .keyboard .row .key.highlight {
+          background: #e48201; }
       .container .keyboard .row-first > :first-child {
         background: #e26042; }
       .container .keyboard .row .backspace,
