@@ -85,7 +85,9 @@ img.src = lang === "en" ? "./assets/images/en.svg" : "./assets/images/ru.svg";
 ({ keys, ruKeys } = appendKeys(keyboard, rows, lang));
 
 document.addEventListener("keydown", (e) => {
-  e.preventDefault();
+  if (!e.code.toLowerCase().includes("arrow")) {
+    e.preventDefault();
+  } else return;
 
   textArea.focus();
   const output = handleInput(e, ruKeys, lang, pressed);
