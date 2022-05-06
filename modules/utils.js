@@ -73,10 +73,21 @@ function determineLeftRight(event, keys, controller, string) {
   }
 }
 
-function controlHighlight(event, obj, controller = true) {
+function controlHighlight(event, obj, controller = true, pressed = {}) {
   let keys = {};
   let ruKeys = {};
   ({ keys, ruKeys } = obj);
+
+  if ("control" in pressed && "alt" in pressed) {
+    keys.ctrl.classList.add("active");
+    keys.alt.classList.add("active");
+  }
+
+  if ("ctrl" in pressed && "alt" in pressed) {
+    keys.ctrl.classList.add("active");
+    keys.alt.classList.add("active");
+  }
+
   const code = event.code.toLowerCase();
   if (code.includes("control"))
     determineLeftRight(event, keys, controller, "control");

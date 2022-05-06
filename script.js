@@ -107,7 +107,7 @@ document.addEventListener("keydown", (e) => {
     }
   }
 
-  controlHighlight(e, { keys, ruKeys });
+  controlHighlight(e, { keys, ruKeys }, true, pressed);
 });
 
 document.addEventListener("keyup", (e) => {
