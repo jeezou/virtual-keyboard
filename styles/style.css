@@ -266,7 +266,7 @@ body {
       .container .keyboard .row .shift {
         flex-grow: 1.8; }
       .container .keyboard .row .space {
-        flex-grow: 7.2; }
+        flex-grow: 7.8; }
 
 @media screen and (max-width: 1700px) {
   .container .input-container {
