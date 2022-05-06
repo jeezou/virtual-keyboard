@@ -268,6 +268,43 @@ body {
       .container .keyboard .row .space {
         flex-grow: 7.2; }
 
+@media screen and (max-width: 1700px) {
+  .container .input-container {
+    height: 25%;
+    max-width: 1100px; }
+  .container .keyboard {
+    row-gap: 20px;
+    column-gap: 20px;
+    max-width: 1100px;
+    height: 50%; }
+    .container .keyboard .row .key {
+      border-radius: 5px; } }
+
+@media screen and (max-width: 1279px) {
+  .container .input-container {
+    max-width: 1100px; }
+  .container .keyboard {
+    row-gap: 10px;
+    column-gap: 10px;
+    padding: 5px 5px; }
+    .container .keyboard .row .key {
+      box-shadow: 0 5px 0 #915100, inset 0 0 0 1px #915100;
+      border-radius: 5px; } }
+
+@media screen and (max-height: 750px) {
+  .container {
+    row-gap: 2%; }
+    .container .input-container .textarea {
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, 0 0 0 2px #444444;
+      padding: 20px; }
+    .container .keyboard {
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, inset 0 0 0 2px #444444; }
+    .container .info-container .info-contacts {
+      row-gap: 25px;
+      padding-top: 20px; }
+    .container .info-container .info-guide {
+      row-gap: 5px; } }
+
 @media screen and (min-width: 2000px) {
   html {
     font-size: calc(0.4vw +10px); }
