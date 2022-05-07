@@ -124,7 +124,9 @@ document.addEventListener("keyup", (e) => {
 
 keyboard.addEventListener("mousedown", (e) => {
   if (e.target.classList.contains("key")) {
-    const main = e.target.childNodes[0].textContent;
+    const main = e.target.childNodes[0].textContent
+      .toLowerCase()
+      .replace(/\s/g, "");
     if (!pressed[main] && main !== "capslock") {
       pressed[main] = true;
       if ((pressed.ctrl && pressed.alt) || (pressed.control && pressed.alt)) {

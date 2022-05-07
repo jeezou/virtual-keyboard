@@ -250,8 +250,12 @@ function handleInput(e, ruKeys, lang, pressed) {
   const normalizeKey = e.key.toLowerCase().replace(/\s/g, "");
   if (normalizeKey in ruKeys) {
     if (!controls.includes(normalizeKey)) {
-      if (lang === "en") output += e.key;
-      else {
+      if (lang === "en") {
+        if (pressed.shift) output += e.key.toUpperCase();
+        else if (pressed.capslock && !pressed.shift)
+          output += e.key.toUpperCase();
+        else output += e.key.toLowerCase();
+      } else {
         const node = ruKeys[normalizeKey];
         const main = node.childNodes[0].textContent;
         const sec = node.childNodes[1] ? node.childNodes[1].textContent : "";
