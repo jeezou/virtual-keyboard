@@ -87,7 +87,11 @@ img.src = lang === "en" ? "./assets/images/en.svg" : "./assets/images/ru.svg";
 document.addEventListener("keydown", (e) => {
   if (!e.code.toLowerCase().includes("arrow")) {
     e.preventDefault();
-  } else return;
+  } else {
+    controlHighlight(e, { keys, ruKeys }, true, pressed);
+
+    return;
+  }
 
   textArea.focus();
   const output = handleInput(e, ruKeys, lang, pressed);
@@ -106,8 +110,6 @@ document.addEventListener("keydown", (e) => {
       localStorage.setItem("lang", lang);
     }
   }
-
-  controlHighlight(e, { keys, ruKeys }, true, pressed);
 });
 
 document.addEventListener("keyup", (e) => {
