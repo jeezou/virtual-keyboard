@@ -1,0 +1,491 @@
+@import url("https://fonts.googleapis.com/css2?family=Scada:wght@700&family=Yeseva+One&display=swap");
+
+html {
+  font-size: calc(0.55vw + 5px);
+}
+
+body {
+  font-family: "Scada", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 3vh;
+  overflow: hidden;
+
+  position: relative;
+  background-color: #ffe9cf;
+}
+
+.container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 5%;
+
+  > * {
+    max-width: 1200px;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    height: 30%;
+
+    .textarea {
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      max-height: 250px;
+      padding: 2rem;
+      box-sizing: border-box;
+
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+
+      font-size: 1.4rem;
+      box-shadow: 0 0 0 2px #2b1800, rgba(50, 50, 93, 0.25) 0px 20px 30px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+      border: none;
+      background-color: transparent;
+      resize: none;
+      outline: none;
+
+      background: #fcf5ec;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+        background-color: #f9f9fd;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #434343;
+      }
+    }
+  }
+
+  .info-container {
+    user-select: none;
+    background-color: #ffcc8e;
+
+    position: relative;
+    height: 25%;
+    width: 100vw;
+    max-width: none;
+
+    border-top: 2px solid #2b1800;
+
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    column-gap: 10vw;
+
+    > * {
+      padding-top: 20px;
+    }
+
+    .info-contacts {
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      row-gap: 40px;
+
+      .content {
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        cursor: pointer;
+        position: relative;
+        width: fit-content;
+
+        &:after {
+          content: "";
+          width: 0;
+          height: 2px;
+          position: absolute;
+          background: #000;
+          bottom: -5px;
+          left: 0;
+
+          transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+          &:after {
+            width: 100%;
+          }
+        }
+      }
+
+      .wrapper {
+        position: relative;
+        display: inline-block;
+
+        &:after {
+          content: "";
+          height: 100%;
+          width: 100%;
+          padding: 4px;
+          position: absolute;
+          bottom: -15px;
+          left: -4px;
+          z-index: 0;
+          background-color: #2b1800;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 0.3rem;
+        }
+      }
+
+      .contacts-heading {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        padding: 1rem 1.3rem;
+        box-sizing: border-box;
+        background-color: #ffa12b;
+        border-radius: 0.3rem;
+        color: #f6f6f6;
+        font-size: 1.3rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        row-gap: 2px;
+        z-index: 1;
+
+        height: fit-content;
+
+        text-transform: uppercase;
+        text-shadow: 0px 1px 0px #000;
+
+        -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+        -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+        box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+
+        &:hover {
+          top: 3px;
+          background-color: #fb9922;
+
+          -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+          box-shadow: inset 0 1px 0 #ffe5c4, 0 7px 0 #915100;
+        }
+
+        &:active {
+          top: 10px;
+          background-color: #f78900;
+
+          -webkit-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+          box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+        }
+      }
+    }
+
+    .info-guide {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+
+      font-size: 1.3rem;
+
+      border-radius: 0.7vw;
+
+      .heading {
+        width: 70%;
+        text-align: center;
+        border-bottom: 2px solid rgb(56, 56, 56);
+        align-self: center;
+        font-size: 2rem;
+        padding-bottom: 8px;
+        margin-bottom: 3px;
+      }
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: column;
+
+      .content {
+        display: flex;
+        height: 70%;
+        font-size: 1.2rem;
+        justify-content: center;
+        align-items: center;
+        column-gap: 20px;
+      }
+
+      .image {
+        height: 40%;
+        justify-self: flex-start;
+      }
+
+      .language-heading {
+        white-space: nowrap;
+        text-align: center;
+        border-bottom: 2px solid rgb(56, 56, 56);
+        align-self: center;
+        font-size: 2rem;
+        padding-bottom: 8px;
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  .keyboard {
+    user-select: none;
+    height: 45%;
+    width: 100%;
+    max-height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1vw;
+    text-transform: capitalize;
+    padding: 20px 20px;
+    padding-bottom: 25px;
+    box-sizing: border-box;
+
+    background: #fcf5ec;
+    border-radius: 1vw;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+      rgba(0, 0, 0, 0.09) 0px 32px 16px, inset 0 0 0 2px rgb(68, 68, 68);
+
+    .row {
+      column-gap: 0.8vw;
+      display: flex;
+      width: 95%;
+      height: 14%;
+
+      .key {
+        flex: 1;
+        background: rgb(253, 238, 194);
+
+        border-radius: 5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+        top: 0px;
+
+        box-shadow: 0 8px 0 #915100, inset 0 0 0 1px #915100;
+
+        cursor: pointer;
+
+        transition: all 0.15s ease-in-out;
+
+        .sec {
+          position: absolute;
+          left: 10%;
+          top: 10%;
+
+          pointer-events: none;
+        }
+
+        &.arrow {
+          background: rgb(226, 96, 66);
+        }
+
+        &.active {
+          top: 8px;
+          background-color: #f78900;
+          transition: all 0.1s ease-in-out;
+          box-shadow: 0 0px 0 #915100, inset 0 0 0 1px #915100;
+        }
+
+        &:active {
+          top: 8px;
+          background-color: #f78900;
+          transition: all 0.1s ease-in-out;
+
+          box-shadow: 0 0px 0 #915100, inset 0 0 0 1px #915100;
+        }
+
+        &.highlight {
+          background: #e48201;
+        }
+      }
+
+      &-first {
+        > :first-child {
+          background: rgb(226, 96, 66);
+        }
+      }
+
+      .backspace,
+      .tab,
+      .enter,
+      .caps,
+      .shift,
+      .control,
+      .rcontrol,
+      .win,
+      .alt,
+      .ralt,
+      .rshift,
+      .delete,
+      .backslash {
+        background: rgb(67, 67, 67);
+        color: #e0e0e0;
+      }
+
+      .backspace {
+        flex-grow: 2;
+      }
+
+      .backslash {
+        flex-grow: 1.3;
+      }
+
+      .tab {
+        flex-grow: 1.4;
+      }
+
+      .enter {
+        flex-grow: 2.4;
+      }
+
+      .caps {
+        flex-grow: 1.6;
+      }
+
+      .shift {
+        flex-grow: 1.8;
+      }
+      .space {
+        flex-grow: 7.8;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .container {
+    .input-container {
+      height: 25%;
+
+      max-width: 1100px;
+    }
+    .keyboard {
+      row-gap: 20px;
+      column-gap: 20px;
+
+      max-width: 1100px;
+      height: 50%;
+
+      .row .key {
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .container {
+    .input-container {
+      max-width: 1100px;
+    }
+    .keyboard {
+      row-gap: 10px;
+      column-gap: 10px;
+
+      padding: 5px 5px;
+
+      .row .key {
+        box-shadow: 0 5px 0 #915100, inset 0 0 0 1px #915100;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 750px) {
+  .container {
+    row-gap: 2%;
+
+    .input-container {
+      .textarea {
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+          rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+          0 0 0 2px rgb(68, 68, 68);
+        padding: 20px;
+      }
+    }
+
+    .keyboard {
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        inset 0 0 0 2px rgb(68, 68, 68);
+    }
+
+    .info-container {
+      .info-contacts {
+        row-gap: 25px;
+        padding-top: 20px;
+      }
+      .info-guide {
+        row-gap: 5px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 2000px) {
+  html {
+    font-size: calc(0.4vw +10px);
+  }
+  .container {
+    row-gap: 5%;
+    .input-container {
+      width: 90%;
+      max-width: none;
+      box-sizing: content-box;
+
+      .textarea {
+        height: 100%;
+        max-height: 350px;
+        min-height: 250px;
+      }
+    }
+    .keyboard {
+      padding: 30px 30px;
+      box-sizing: border-box;
+      max-width: none;
+      width: 90%;
+
+      height: 90%;
+      max-height: 600px;
+
+      .row .key {
+        border-radius: 8px;
+
+        box-shadow: 0 12px 0 #915100, inset 0 0 0 1px #915100;
+      }
+    }
+  }
+}
