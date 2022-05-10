@@ -110,6 +110,7 @@ document.addEventListener("keydown", (e) => {
       localStorage.setItem("lang", lang);
     }
   }
+  controlHighlight(e, { keys, ruKeys }, true, pressed);
 });
 
 document.addEventListener("keyup", (e) => {
